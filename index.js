@@ -1,5 +1,7 @@
 const Discord = require("discord.js");
+const { getConfig } = require("@confly-dev/confly-js");
 const config = require("./config.json");
+
 const client = new Discord.Client({
     intents: ['Guilds',
         "DirectMessages",
@@ -11,10 +13,13 @@ client.on("ready", () => {
     console.log(`Logged in as ${client.user.tag}!`);
 });
 
-client.on("messageCreate", (msg) => {
-    if (msg.content === "ping") {
-        msg.reply("Pong!");
+client.on("messageCreate", async (msg) => {
+    const conflyConfig = await getConfig(config.confly_token);
+
+    if (!conflyConfig.enabled) return;
+    if (msg.content === conflyConfig.trigger) {
+        msg.reply(conflyConfig.response);
     }
 });
 
-client.login(config.token);
+client.login(config.discord_token);
