@@ -1,0 +1,21 @@
+{
+  "Main": {
+    "config": {
+      "enabled": {
+        "type": "boolean",
+        "display": "switch",
+        "description": "Enable or disable the bot."
+      },
+      "trigger": {
+        "type": "string",
+        "default": "ping",
+        "description": "The message that triggers the bot."
+      },
+      "response": {
+        "type": "string",
+        "default": "Pong!",
+        "description": "The message that the bot replies with."
+      }
+    }
+  }
+}
